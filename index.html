@@ -2686,7 +2686,15 @@ const BUILTIN = [];
     const t = nowSong.textContent; if(t!==hvNowTxt){ hvNowTxt = t; hvNowEl.textContent = (t && t!=='—') ? '♪ '+t : ''; }
   }
   window.addEventListener('resize', ()=>{ if(HV.open) hvLayout(); });
-  const HEMO = ['❤️','💗','💖','💕','💘','🩷'];
+  const HCOLS = ['#ff5c8a','#ff8fb1','#ffb3c8','#ff4d4d','#ff9f43','#ffd95a','#7bd88f','#5ec8ff','#7b8cff','#c9a8ff','#ff7ad9','#ffffff'];
+  function pixHeart(size){
+    const c = HCOLS[Math.floor(Math.random()*HCOLS.length)];
+    const rows = [[1,2],[4,2],[0,7],[0,7],[1,5],[2,3],[3,1]];
+    const ys = [0,0,1,2,3,4,5];
+    const r = rows.map((q,i)=>'<rect x="'+q[0]+'" y="'+ys[i]+'" width="'+q[1]+'" height="1" fill="'+c+'"/>').join('');
+    const hl = '<rect x="1" y="1" width="1" height="1" fill="#fff" opacity=".55"/>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 6" width="'+size+'" height="'+(size*6/7).toFixed(1)+'" shape-rendering="crispEdges" style="display:block">'+r+hl+'</svg>';
+  }
   const fmtN = (n)=> Number(n).toLocaleString('tr-TR');
   function hvSet(w, n, pop){
     const el = hv.querySelector('.hv-card[data-w="'+w+'"] .hv-n'); if(!el) return;
@@ -2702,9 +2710,8 @@ const BUILTIN = [];
   }
   function hvFloat(x, y, n){
     for(let i=0;i<n && hfCount<60;i++){
-      const e = document.createElement('span'); e.className = 'hf'; e.textContent = HEMO[Math.floor(Math.random()*HEMO.length)];
+      const e = document.createElement('span'); e.className = 'hf'; e.innerHTML = pixHeart(Math.round(18+Math.random()*20));
       e.style.left = (x+(Math.random()-.5)*36)+'px'; e.style.top = (y+(Math.random()-.5)*20)+'px';
-      e.style.fontSize = (20+Math.random()*22)+'px';
       e.style.setProperty('--dx', ((Math.random()-.5)*90)+'px'); e.style.setProperty('--dy', (110+Math.random()*120)+'px');
       e.style.animationDuration = (1.2+Math.random()*.8)+'s';
       hfCount++; e.onanimationend = ()=>{ hfCount--; e.remove(); };
