@@ -255,9 +255,9 @@
   #menuList .mi{ flex:none; width:1.5em; text-align:center; font-size:1.05em; line-height:1; }
   #hv{ display:none; position:fixed; inset:0; z-index:50; background:var(--bg); flex-direction:column; align-items:center; padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(14px + env(safe-area-inset-bottom,0px)); overflow:hidden; user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
   #hv.open{ display:flex; }
-  #hvClose{ position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); right:16px; width:40px; height:40px; padding:0; border-radius:14px; border:1px solid var(--border); background:var(--card); color:var(--rose-dark); font-size:1.05rem; cursor:pointer; }
-  .hv-title{ margin:6px 0 16px; color:var(--rose-dark); font-weight:600; font-size:1.15rem; }
-  .hv-cnt{ display:flex; gap:12px; width:100%; max-width:420px; }
+  #hvClose{ position:absolute; z-index:3; top:calc(14px + env(safe-area-inset-top,0px)); right:16px; width:40px; height:40px; padding:0; border-radius:14px; border:1px solid var(--border); background:var(--card); color:var(--rose-dark); font-size:1.05rem; cursor:pointer; }
+  .hv-title{ position:relative; z-index:2; margin:2px 0 12px; padding:7px 18px; border-radius:16px; background:var(--card); border:1px solid var(--border); color:var(--rose-dark); font-weight:600; font-size:1.05rem; box-shadow:0 3px 10px rgba(196,96,125,.15); }
+  .hv-cnt{ position:relative; z-index:2; display:flex; gap:12px; width:100%; max-width:420px; }
   .hv-card{ flex:1 1 0; min-width:0; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:12px 8px 10px; text-align:center; box-shadow:0 3px 10px rgba(196,96,125,.12); }
   .hv-card.me{ border-color:var(--rose); }
   .hv-n{ font-size:1.9rem; font-weight:700; color:var(--rose-dark); line-height:1.15; font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:transform .15s ease; }
@@ -265,10 +265,11 @@
   .hv-n.pop{ transform:scale(1.12); }
   .hv-l{ margin-top:2px; font-size:.8rem; color:var(--ink-dim); }
   .hv-card.me .hv-l::after{ content:' · sen'; }
-  .hv-stage{ flex:1; width:100%; max-width:460px; display:flex; align-items:center; justify-content:center; min-height:0; }
-  #hvAvatar{ width:100%; max-width:420px; height:auto; max-height:100%; display:block; }
-  .hv-hint{ color:var(--ink-dim); font-size:.85rem; text-align:center; }
-  .hv-now{ margin-top:6px; color:var(--ink-dim); font-size:.75rem; max-width:92%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-height:1.1em; }
+  .hv-stage{ flex:1; width:100%; min-height:0; }
+  #hvAvatar{ position:absolute; left:0; top:0; width:100%; height:100%; z-index:0; display:block; }
+  .hv-hint{ position:relative; z-index:2; padding:7px 16px; border-radius:16px; background:var(--card); border:1px solid var(--border); color:var(--ink-dim); font-size:.85rem; text-align:center; box-shadow:0 3px 10px rgba(196,96,125,.12); }
+  .hv-now{ position:relative; z-index:2; margin-top:6px; padding:4px 12px; border-radius:12px; background:var(--card); border:1px solid var(--border); color:var(--ink-dim); font-size:.75rem; max-width:92%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hv-now:empty{ display:none; }
   .hf{ position:fixed; z-index:70; pointer-events:none; line-height:1; will-change:transform,opacity; animation:hfUp 1.5s ease-out forwards; }
   @keyframes hfUp{ 0%{ transform:translate(-50%,-50%) scale(.4); opacity:0; } 15%{ opacity:1; transform:translate(-50%,-60%) scale(1.15); } 100%{ transform:translate(calc(-50% + var(--dx)), calc(-50% - var(--dy))) scale(.9); opacity:0; } }
   /* --- mesaj penceresi, son dinlenen satırları --- */
@@ -741,7 +742,27 @@ const BUILTIN = [];
   // --- pixel couple avatar, bobs when playing ---
   const avatar = document.getElementById('avatar');
   let avatarDancing = false;
-  let frame = 0, jumpF = -1;
+  let frame = 0, jumpF = -1, lastScn = '';
+  // öpücük (kalp ekranı): kissWho dokunan kişi, karşısına eğilir
+  let kissWho = null, kissUntil = 0, kissAmt = 0, kissPop = 0; const kparts = [];
+  function kissTap(w){
+    kissWho = w; kissUntil = performance.now()+420; kissPop = 1;
+    for(let i=0;i<3 && kparts.length<40;i++) kparts.push({x:40+(Math.random()-.5)*8, y:13, vx:(Math.random()-.5)*0.25, vy:-0.3-Math.random()*0.25, l:0, m:60+Math.random()*30, c:COLS[Math.floor(Math.random()*COLS.length)], sc:0.7+Math.random()*0.5});
+  }
+  function kissStep(){
+    const tgt = (kissWho && performance.now()<kissUntil) ? 1 : 0;
+    kissAmt += (tgt-kissAmt)*0.28; if(kissAmt<0.01 && !tgt) kissAmt = 0;
+    if(kissPop>0) kissPop = Math.max(0, kissPop-0.07);
+  }
+  function kissParticlesSvg(){
+    let out = '';
+    for(let i=kparts.length-1;i>=0;i--){
+      const q = kparts[i]; q.l++; q.x += q.vx; q.y += q.vy; q.vx *= 0.99;
+      if(q.l>=q.m){ kparts.splice(i,1); continue; }
+      out += heartPx(q.x, q.y, q.c, Math.min(1,(q.m-q.l)/(q.m*0.4)), q.sc);
+    }
+    return out;
+  }
   function jh(off){ if(jumpF<0) return 0; const p=(jumpF-off)/24; return (p>0 && p<1) ? Math.sin(p*Math.PI)*7 : 0; }
   const PALETTE = {
     outline:'#2a1a1f',
@@ -1236,14 +1257,16 @@ const BUILTIN = [];
 
 
 
-  function drawAvatar(){
+  function drawAvatar(hv){
     const bob = avatarDancing ? Math.sin(frame/6)*2.2 : 0;
     const bob2 = avatarDancing ? Math.sin(frame/6+1)*2.2 : 0;
     const sway = avatarDancing ? Math.sin(frame/6)*1 : 0;
-    let s = (sceneKey ? sceneSvg() : starsSvg()) + barsSvg();
+    const scn0 = (sceneKey ? sceneSvg() : starsSvg()); lastScn = scn0;
+    let s = scn0 + barsSvg();
+    const kd = hv ? kissAmt*13 + kissPop*2 : 0;
 
     // ===== person A (left) — erkek, kahverengi dağınık saç, gözlüklü =====
-    const ax=8+sway, ay=8+bob-jh(0);
+    const ax=8+sway+(hv && kissWho==='berke' ? kd : 0), ay=8+bob-jh(0);
     // hair back mass (outline)
     s += pr(ax+1, ay+0, 18, 11, PALETTE.outline);
     s += pr(ax+2, ay+1, 16, 9, PALETTE.hairA);
@@ -1297,7 +1320,7 @@ const BUILTIN = [];
     s += pr(ax+12, ay+34, 2, 5, PALETTE.pantsA);
 
     // ===== person B (right) — kız, uzun siyah saç =====
-    const bx=40+sway*-1, by=8+bob2-jh(4);
+    const bx=40+sway*-1-(hv && kissWho==='elif' ? kd : 0), by=8+bob2-jh(4);
     // hair back mass, longer, with waves
     s += pr(bx+2, by+2, 16, 26, PALETTE.outline);
     s += pr(bx+3, by+3, 14, 24, PALETTE.hairB);
@@ -1367,6 +1390,10 @@ const BUILTIN = [];
     s += pr(hx+1, hy+6, 4, 2, PALETTE.heart);
     s += pr(hx+2, hy+8, 2, 2, PALETTE.heart);
 
+    if(hv){
+      if(kissAmt>0.3 || kissPop>0){ const mx = ((ax+16)+(bx+4))/2; s += heartPx(mx-4, ay-3-kissPop*2, '#ff5c8a', Math.min(1, kissAmt+kissPop), 1.6); }
+      return s + kissParticlesSvg();
+    }
     s += particlesSvg();
     avatar.innerHTML = s;
   }
@@ -1374,7 +1401,7 @@ const BUILTIN = [];
     frame++;
     if(jumpF>=0){ jumpF++; if(jumpF>34) jumpF=-1; }
     drawAvatar();
-    if(hvMirror) hvMirror();
+    if(hvMirror){ kissStep(); hvMirror(); }
     requestAnimationFrame(tick);
   }
 
@@ -2629,7 +2656,36 @@ const BUILTIN = [];
   // ===== Kalp ekranı: hearts-elif.json / hearts-berke.json ({n: toplam}), şarkı çalmaya devam eder =====
   const hv = document.getElementById('hv'), hvAv = document.getElementById('hvAvatar'), hvNowEl = document.getElementById('hvNow');
   const HV = {saved:0, pending:0, sha:undefined, otherN:null, timer:null, saving:false, poll:null, open:false};
-  let hvMirror = null, hvVB = '', hvNowTxt = '', hfCount = 0;
+  let hvMirror = null, hvNowTxt = '', hfCount = 0;
+  // ekranı dolduran sahne: genişlikte ~84 birim, kalan yükseklik sahnenin alt/üst kenarı uzatılarak doldurulur
+  function hvLayout(){
+    const Wp = hv.clientWidth || innerWidth, Hp = hv.clientHeight || innerHeight;
+    const sc = Math.min(Wp/84, Hp/58, 6);
+    HV.w = Wp/sc; HV.h = Hp/sc; HV.x0 = 33 - HV.w/2; HV.y0 = 27 - HV.h*0.56;
+    hvAv.setAttribute('viewBox', HV.x0.toFixed(2)+' '+HV.y0.toFixed(2)+' '+HV.w.toFixed(2)+' '+HV.h.toFixed(2));
+  }
+  function hvRender(){
+    const dS = avatarDancing, sx = vbx0, sw = vbw;
+    let body = '';
+    avatarDancing = false; vbx0 = HV.x0; vbw = HV.w;
+    try{ body = drawAvatar(true); }finally{ avatarDancing = dS; vbx0 = sx; vbw = sw; }
+    const X = HV.x0, W = HV.w, top = -4-HV.y0, bot = HV.y0+HV.h-48;
+    let o = '';
+    if(sceneKey && (top>0.2 || bot>0.2)){
+      // üst/alt boşluk: sahnenin kenar satırı uzatılır, yatay bulanıklıkla çizgi/leke kalmaz
+      if(!HV.ext || frame%4===0){
+        const sx2 = vbx0, sw2 = vbw, sd2 = avatarDancing; avatarDancing = false; vbx0 = X-40; vbw = W+80;
+        try{ HV.ext = sceneSvg(); }finally{ vbx0 = sx2; vbw = sw2; avatarDancing = sd2; }
+      }
+      const ex = X-40, ew = W+80;
+      o += '<defs><filter id="hvbl" filterUnits="userSpaceOnUse" x="'+ex+'" y="'+(HV.y0-5)+'" width="'+ew+'" height="'+(HV.h+10)+'"><feGaussianBlur stdDeviation="7 0"/></filter></defs>';
+      if(top>0.2) o += '<g filter="url(#hvbl)"><svg x="'+ex+'" y="'+HV.y0+'" width="'+ew+'" height="'+top+'" viewBox="'+ex+' -4 '+ew+' 1" preserveAspectRatio="none">'+HV.ext+'</svg></g>';
+      if(bot>0.2) o += '<g filter="url(#hvbl)"><svg x="'+ex+'" y="48" width="'+ew+'" height="'+bot+'" viewBox="'+ex+' 47 '+ew+' 1" preserveAspectRatio="none">'+HV.ext+'</svg></g>';
+    }
+    hvAv.innerHTML = o + body;
+    const t = nowSong.textContent; if(t!==hvNowTxt){ hvNowTxt = t; hvNowEl.textContent = (t && t!=='—') ? '♪ '+t : ''; }
+  }
+  window.addEventListener('resize', ()=>{ if(HV.open) hvLayout(); });
   const HEMO = ['❤️','💗','💖','💕','💘','🩷'];
   const fmtN = (n)=> Number(n).toLocaleString('tr-TR');
   function hvSet(w, n, pop){
@@ -2677,21 +2733,17 @@ const BUILTIN = [];
     const me = who(); if(!me || !HV.open) return;
     try{
       const g = await jGet('hearts-'+otherOf(me)+'.json'), n = Math.max(0, parseInt(g.data && g.data.n)||0);
-      if(HV.otherN!==null && n>HV.otherN){ jumpF = 0; hvFloat(innerWidth/2, innerHeight*0.55, Math.min(n-HV.otherN, 7)); }
+      if(HV.otherN!==null && n>HV.otherN){ const k = Math.min(n-HV.otherN, 6), o = otherOf(me); for(let i=0;i<k;i++) setTimeout(()=>{ if(HV.open){ kissTap(o); hvFloat(innerWidth/2, innerHeight*0.5, 1); } }, i*260); }
       HV.otherN = n; if(HV.open) hvPaint(false);
     }catch(e){ if(authFail(e)) hvClose(); }
   }
   async function hvOpen(){
     if(!hasToken()){ tokenDialog(); return; }
     const me = who(); if(!me){ whoDialog(hvOpen); return; }
-    HV.open = true; HV.otherN = null; hvVB = ''; hvNowTxt = '';
+    HV.open = true; HV.otherN = null; hvNowTxt = ''; kissWho = null; kissAmt = 0; kissPop = 0; kparts.length = 0; HV.ext = '';
     hv.querySelectorAll('.hv-card').forEach(c=>c.classList.toggle('me', c.dataset.w===me));
     hv.setAttribute('aria-hidden','false'); hv.classList.add('open');
-    hvMirror = ()=>{
-      const vb = avatar.getAttribute('viewBox'); if(vb!==hvVB){ hvAv.setAttribute('viewBox', vb); hvVB = vb; }
-      hvAv.innerHTML = avatar.innerHTML;
-      const t = nowSong.textContent; if(t!==hvNowTxt){ hvNowTxt = t; hvNowEl.textContent = (t && t!=='—') ? '♪ '+t : ''; }
-    };
+    hvLayout(); hvMirror = hvRender;
     hvPaint(false);
     try{ const g = await jGet('hearts-'+me+'.json'); HV.sha = g.sha; HV.saved = Math.max(0, parseInt(g.data && g.data.n)||0); hvPaint(false); }
     catch(e){ if(authFail(e)){ hvClose(); return; } }
@@ -2703,7 +2755,7 @@ const BUILTIN = [];
   }
   hv.addEventListener('pointerdown', (e)=>{
     if(e.target.closest('#hvClose')) return;
-    HV.pending++; jumpF = 0;
+    HV.pending++; kissTap(who());
     hvFloat(e.clientX, e.clientY, Math.random()<.35 ? 2 : 1);
     hvPaint(true); hvSchedule();
     try{ if(navigator.vibrate) navigator.vibrate(8); }catch(_){}
