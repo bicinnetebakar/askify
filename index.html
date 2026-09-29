@@ -637,7 +637,7 @@ const BUILTIN = [];
   const statusEl = document.getElementById('status');
   function hasToken(){ try{ return !!localStorage.getItem('ghtoken'); }catch(e){ return false; } }
   function showStatus(){ statusEl.textContent = ''; }
-  const AUDIO_RE = /\.(mp3|m4a|wav|ogg|aac|flac)$/i;
+  const AUDIO_RE = /\.(mp3|m4a|wav|ogg|aac|flac|opus|webm|mp4)$/i;
   function remoteTrack(name){
     return {id:'r:'+name, name:name.replace(/\.[^/.]+$/,''), url: justUploaded[name] || GH_DIR+'/'+encodeURIComponent(name), builtin:true};
   }
