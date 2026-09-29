@@ -282,42 +282,46 @@
   #dlg input[type=date], #dlg input[type=time]{ width:100%; padding:12px 14px; border:1.5px solid var(--border); border-radius:12px; background:var(--bg); color:var(--ink); font:inherit; font-size:1rem; outline:none; box-sizing:border-box; }
   #dlg input[type=date]:focus, #dlg input[type=time]:focus{ border-color:var(--rose); }
   /* --- çiftlik --- */
-  #menuWrap.open #menuList button:nth-child(6){ transition-delay:.35s; }
-  #frmBtn .mi{ position:relative; }
-  #frmBtn.fd .mi::after{ content:''; position:absolute; top:-2px; right:-3px; width:9px; height:9px; border-radius:50%; background:#4dabf7; }
-  #menuWrap.fd #menuBtn{ box-shadow:0 0 0 2px #4dabf7; }
-  #fm{ display:none; position:fixed; inset:0; z-index:50; background:linear-gradient(#9ddcff 0,#9ddcff 150px,#7ccf6e 150px,#7ccf6e 100%); color:#5a3a22; flex-direction:column; padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px)); overflow-y:auto; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; font-family:ui-monospace,'Courier New',monospace; font-weight:700; }
+  #dayRow{ display:flex; align-items:flex-start; gap:8px; width:max-content; }
+  #frmBtn{ position:relative; flex:none; width:40px; height:40px; padding:0; border-radius:14px; border:1px solid var(--border); background:var(--card); box-shadow:0 3px 10px rgba(196,96,125,.15); cursor:pointer; font-size:1.15rem; line-height:1; -webkit-tap-highlight-color:transparent; transition:transform .15s; }
+  #frmBtn:active{ transform:scale(.9); }
+  #frmBtn.fd::after{ content:''; position:absolute; top:-3px; right:-3px; width:10px; height:10px; border-radius:50%; background:#4dabf7; border:2px solid var(--bg); }
+  #fm{ display:none; position:fixed; inset:0; z-index:50; background:linear-gradient(#8fd3ff 0,#d4f1ff 170px,#8fd07a 170px,#6fb862 100%); color:#4a2f1c; font-family:ui-monospace,Menlo,Consolas,monospace; flex-direction:column; padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px)); overflow-y:auto; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; }
   #fm.open{ display:flex; }
-  #fdec{ position:absolute; top:0; left:0; width:100%; height:150px; pointer-events:none; }
-  #fmc{ position:relative; z-index:1; width:100%; max-width:520px; margin:0 auto; }
-  .pn, .pb, .fc, #fsh, .si, #fmt, .fl{ box-shadow:0 -3px 0 #5a3a22, 0 3px 0 #5a3a22, -3px 0 0 #5a3a22, 3px 0 0 #5a3a22; }
-  .pn{ background:#fff4de; margin:3px; } .pb{ background:#ffb3c8; color:#5a3a22; font:inherit; font-size:.85rem; border:0; margin:3px; cursor:pointer; padding:10px 6px; }
-  .pb:active, .si:active{ transform:translateY(2px); } .pb.on{ background:#ffd95a; }
-  .fh{ display:flex; gap:12px; align-items:center; margin-bottom:14px; }
-  .fp{ flex:1; padding:8px 10px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; font-size:.9rem; }
-  .fp svg{ width:20px; height:20px; } .fp em{ font-style:normal; margin-left:auto; background:#ff8fb1; color:#fff; padding:1px 6px; }
-  .fx{ flex:0 0 100%; height:8px; background:#5a3a22; padding:1px; } .fx b{ display:block; height:100%; background:#ffd95a; }
-  .fbn{ width:44px; height:44px; padding:0; flex:none; }
-  .ft{ display:flex; gap:10px; margin-bottom:6px; } .ft .pb{ flex:1; }
-  .fl{ display:inline-block; margin:18px 0 12px 3px; padding:3px 10px; background:#b98550; color:#fff4de; font-size:.8rem; }
-  .fg{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; padding:0 3px; }
-  .fc{ position:relative; aspect-ratio:1; overflow:hidden; cursor:pointer; background:#9a6a44; }
-  .fc svg{ width:100%; height:100%; display:block; image-rendering:pixelated; }
-  .fc.e span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:#fff4de; text-shadow:0 2px 0 #5a3a22; }
-  .fc span{ position:absolute; top:0; left:0; padding:0 4px; font-size:.6rem; color:#fff; background:#5a3a22; }
-  .fb, .fw{ position:absolute; left:3px; right:3px; height:6px; background:#5a3a22; padding:1px; box-sizing:border-box; }
-  .fb{ bottom:11px; } .fw{ bottom:3px; } .fb b, .fw b{ display:block; height:100%; } .fb b{ background:#7ddc6a; } .fw b{ background:#5fc4ff; }
-  .fc.rdy{ animation:fbounce .7s steps(2) infinite; } .fc.rdy span{ background:#ff4d6d; }
-  @keyframes fbounce{ 50%{ transform:translateY(-3px); } }
-  .dr{ position:absolute; right:3px; top:3px; width:14px; height:18px; } .dr svg{ width:100%; height:100%; }
-  .fa{ display:flex; gap:10px; margin-top:22px; } .fa .pb{ flex:1; }
-  #fm .hint{ margin:16px 3px 0; padding:8px 10px; background:#fff4de; box-shadow:0 -3px 0 #5a3a22, 0 3px 0 #5a3a22, -3px 0 0 #5a3a22, 3px 0 0 #5a3a22; font-size:.72rem; line-height:1.4; color:#5a3a22; }
-  #fs{ display:none; position:fixed; inset:0; z-index:60; background:rgba(60,40,20,.5); align-items:flex-end; } #fs.open{ display:flex; }
-  #fsh{ width:100%; max-width:520px; margin:0 auto 6px; background:#fff4de; padding:14px; max-height:70%; overflow-y:auto; }
-  #fsh h3{ margin:0 0 10px; color:#5a3a22; font-size:1rem; }
-  .si{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px; margin:0 3px 12px; background:#ffe3c2; cursor:pointer; }
-  .si small{ display:block; color:#8a6a4a; font-size:.68rem; } .si span{ color:#c2264a; font-size:.8rem; white-space:nowrap; } .si.lk{ opacity:.55; }
-  #fmt{ position:fixed; left:50%; bottom:calc(28px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:70; padding:8px 14px; background:#fff4de; color:#5a3a22; font-size:.8rem; opacity:0; transition:opacity .25s; pointer-events:none; max-width:86%; text-align:center; }
+  #fmc{ width:100%; max-width:520px; margin:0 auto; }
+  .fh{ display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+  .fp,.fgl,.fnx,.fbn,.fa button,.ft button,.fgl button{ border:3px solid #6b4530; background:#fff3d6; color:#6b4530; box-shadow:0 3px 0 #6b4530; border-radius:8px; font:inherit; }
+  .fp{ flex:1; padding:7px 10px; font-size:.8rem; }
+  .fx{ height:8px; margin-top:5px; border:2px solid #6b4530; background:#e9d9b4; overflow:hidden; } .fx b{ display:block; height:100%; background:#ff6f9c; }
+  .fbn, .fa button, .ft button, .fgl button{ padding:9px 12px; font-size:.85rem; font-weight:700; cursor:pointer; } .fbn:active,.fa button:active,.ft button:active{ transform:translateY(2px); box-shadow:0 1px 0 #6b4530; }
+  .fbn{ width:40px; height:40px; padding:0; }
+  .ft{ display:flex; gap:8px; margin-bottom:6px; } .ft button{ flex:1; } .ft button.on{ background:#ffd95a; }
+  .fsc{ position:relative; height:74px; margin-bottom:6px; display:flex; align-items:flex-end; justify-content:center; gap:2px; overflow:hidden; } .fsc small{ color:#3d6b2a; font-size:.7rem; padding-bottom:6px; }
+  .fsc svg{ width:38px; height:38px; image-rendering:pixelated; }
+  .sn{ position:absolute; top:2px; right:8px; width:26px; height:26px; background:#ffd95a; border:3px solid #ffb800; box-shadow:0 0 0 3px #fff5b8; }
+  .cl{ position:absolute; top:14px; left:-60px; width:44px; height:12px; background:#fff; box-shadow:8px -8px 0 #fff; animation:fcl 45s linear infinite; } @keyframes fcl{ to{ left:110%; } }
+  .fnx{ padding:7px 10px; font-size:.8rem; text-align:center; margin-bottom:4px; }
+  .fgl{ padding:8px 10px; font-size:.75rem; } .fgl small{ display:block; margin-top:4px; } .fgl button{ margin-top:6px; width:100%; background:#ffd95a; }
+  .fl{ margin:12px 0 6px; font-size:.8rem; font-weight:700; color:#3d2a1c; text-shadow:0 1px 0 #fff8; }
+  .hint{ font-size:.72rem; color:#3d2a1c; line-height:1.5; }
+  .fg{ display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+  .fc{ position:relative; aspect-ratio:1; overflow:hidden; border:3px solid #6b4530; border-radius:6px; background:#7a5238; cursor:pointer; box-shadow:0 3px 0 #6b4530; }
+  .fc.e{ background:#e9d9b4; border-style:dashed; display:flex; align-items:center; justify-content:center; }
+  .fc svg{ width:100%; height:100%; display:block; image-rendering:pixelated; } .fc.an svg{ animation:fbob 1.6s steps(2) infinite; } @keyframes fbob{ 50%{ transform:translateY(-2px); } }
+  .fc em{ position:absolute; top:1px; left:0; right:0; text-align:center; font-style:normal; font-size:.5rem; color:#fff; text-shadow:0 1px 1px #000,0 0 2px #000; }
+  .fc span{ position:absolute; bottom:11px; left:0; right:0; text-align:center; font-size:.55rem; font-weight:700; color:#fff; text-shadow:0 1px 1px #000,0 0 2px #000; }
+  .fc.e span{ position:static; color:#8a6a4a; text-shadow:none; font-size:.75rem; }
+  .fb, .fw{ position:absolute; left:3px; right:3px; height:3px; background:rgba(0,0,0,.5); overflow:hidden; }
+  .fb{ bottom:6px; } .fw{ bottom:2px; } .fb b, .fw b{ display:block; height:100%; } .fb b{ background:#7ddc6a; } .fw b{ background:#4dabf7; }
+  .fc.rdy{ border-color:#ffd95a; animation:dpulse 1s infinite; }
+  .fc.dry::after{ content:''; position:absolute; inset:0; background:rgba(255,220,150,.28); pointer-events:none; }
+  .fa{ display:flex; gap:8px; margin-top:14px; } .fa button{ flex:1; padding:12px 6px; }
+  #fs{ display:none; position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.4); align-items:flex-end; } #fs.open{ display:flex; }
+  #fsh{ width:100%; max-width:520px; margin:0 auto; background:#fff3d6; border:3px solid #6b4530; border-bottom:0; border-radius:12px 12px 0 0; padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px)); max-height:75%; overflow-y:auto; font-family:ui-monospace,Menlo,Consolas,monospace; color:#4a2f1c; }
+  #fsh h3{ margin:0 0 8px; color:#6b4530; }
+  .si{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px 12px; margin-bottom:6px; border:2px solid #6b4530; border-radius:8px; background:#fff; cursor:pointer; }
+  .si small{ display:block; opacity:.7; font-size:.7rem; } .si span{ font-size:.8rem; white-space:nowrap; font-weight:700; } .si.lk{ opacity:.5; }
+  #ftoast{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:70; padding:8px 14px; border:3px solid #6b4530; border-radius:8px; background:#fff3d6; color:#6b4530; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.8rem; opacity:0; transition:opacity .25s; pointer-events:none; max-width:90%; text-align:center; }
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -331,9 +335,9 @@
 </head>
 <body>
 <div class="app">
-  <div id="menuWrap"><button id="menuBtn" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button><div id="menuList"><button id="albBtn" aria-label="Albüm"><span class="mi">📷</span><span>Albüm</span></button><button id="listBtn" aria-label="Listeler"><span class="mi">📝</span><span>Listeler</span></button><button id="statBtn" aria-label="Dinlenmeler"><span class="mi">📊</span><span>Dinlenmeler</span></button><button id="msgBtn" aria-label="Mesaj"><span class="mi">💌</span><span>Mesaj</span></button><button id="frmBtn" aria-label="Çiftlik"><span class="mi">🌾</span><span>Çiftlik</span></button><button id="setBtn" aria-label="Ayarlar"><span class="mi">⚙️</span><span>Ayarlar</span></button></div></div>
+  <div id="menuWrap"><button id="menuBtn" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button><div id="menuList"><button id="albBtn" aria-label="Albüm"><span class="mi">📷</span><span>Albüm</span></button><button id="listBtn" aria-label="Listeler"><span class="mi">📝</span><span>Listeler</span></button><button id="statBtn" aria-label="Dinlenmeler"><span class="mi">📊</span><span>Dinlenmeler</span></button><button id="msgBtn" aria-label="Mesaj"><span class="mi">💌</span><span>Mesaj</span></button><button id="setBtn" aria-label="Ayarlar"><span class="mi">⚙️</span><span>Ayarlar</span></button></div></div>
   <button id="heartBtn" aria-label="Kalpler" title="Kalpler">❤️</button>
-  <div id="leftCol"><div id="dayc" title="Dokun: yıl / ay / gün"><span class="n" id="dayN"></span><span class="l" id="dayL"></span></div><button class="mini" id="cdChip" style="display:none"></button></div>
+  <div id="leftCol"><div id="dayRow"><div id="dayc" title="Dokun: yıl / ay / gün"><span class="n" id="dayN"></span><span class="l" id="dayL"></span></div><button id="frmBtn" aria-label="Çiftlik" title="Çiftlik">🌾</button></div><button class="mini" id="cdChip" style="display:none"></button></div>
   <div class="title">
     <h1>Aşkify</h1>
     <p>Beni hatırla</p>
@@ -2821,42 +2825,65 @@ const BUILTIN = [];
   const H = 3600000, WI = 6*H, FR = (x,y,w,h,c)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+c+'"/>';
   const FSV = (w,h,b)=>'<svg viewBox="0 0 '+w+' '+h+'" shape-rendering="crispEdges">'+b+'</svg>';
   const CROPS = {
-    havuc:{n:'Havuç',g:3,c:5,s:11,lv:1,col:'#ff8a3d'}, cilek:{n:'Çilek',g:6,c:12,s:30,lv:2,col:'#ff4d6d'},
-    misir:{n:'Mısır',g:10,c:20,s:52,lv:3,col:'#ffd95a'}, aycicegi:{n:'Ayçiçeği',g:14,c:35,s:95,lv:4,col:'#ffb800'},
-    karpuz:{n:'Karpuz',g:24,c:60,s:175,lv:5,col:'#2fa86a'}
+    havuc:{n:'Havuç',g:3,c:5,s:11,lv:1,col:'#ff8a3d',k:'root'}, cilek:{n:'Çilek',g:6,c:12,s:30,lv:2,col:'#ff4d6d',k:'dot'},
+    domates:{n:'Domates',g:8,c:18,s:44,lv:3,col:'#e8392f',k:'dot'}, misir:{n:'Mısır',g:10,c:20,s:52,lv:4,col:'#ffd95a',k:'ear'},
+    aycicegi:{n:'Ayçiçeği',g:14,c:35,s:95,lv:5,col:'#ffb800',k:'sun'}, karpuz:{n:'Karpuz',g:24,c:60,s:175,lv:6,col:'#2fa86a',k:'melon'},
+    kabak:{n:'Balkabağı',g:36,c:110,s:330,lv:8,col:'#ff9a2e',k:'gourd'}, uzum:{n:'Üzüm',g:48,c:180,s:560,lv:10,col:'#8e44ad',k:'grape'},
+    kalp:{n:'Kalp Çiçeği',g:72,c:400,s:1400,lv:14,col:'#ff5c8a',k:'heart'}
   };
   const ANIM = {
     tavuk:{n:'Tavuk',c:90,lv:2,fd:8,g:6,s:25,pr:'yumurta'}, inek:{n:'İnek',c:300,lv:4,fd:10,g:12,s:75,pr:'süt'},
-    koyun:{n:'Koyun',c:600,lv:6,fd:12,g:18,s:150,pr:'yün'}
+    koyun:{n:'Koyun',c:600,lv:6,fd:12,g:18,s:150,pr:'yün'}, keci:{n:'Keçi',c:1100,lv:8,fd:14,g:24,s:360,pr:'peynir'},
+    ari:{n:'Arı',c:2500,lv:11,fd:18,g:36,s:900,pr:'bal'}
   };
-  const AS = {tavuk:['#fff','#e0392f','#ffb347'], inek:['#fff','#2b2b33','#f4a6bd'], koyun:['#f1ece2','#4a4a55','#f4a6bd']};
-  const PAL = {g:'#5cbf4a',G:'#2f8a3a',o:'#ff9a3d',O:'#d9611f',r:'#ff4d6d',R:'#b81f45',y:'#ffd95a',Y:'#e0a800',w:'#fff',k:'#3d2a1c',p:'#ffb3c8',l:'#efe6d2',n:'#ffb347',u:'#5fc4ff'};
-  function px(rows, w){ let s = ''; rows.forEach((r,y)=>{ let x = 0; while(x<w){ const c = r[x]||'.'; if(c=='.'){ x++; continue; } let e = x; while(e<w && (r[e]||'.')==c) e++; s += FR(x,y,e-x,1,PAL[c]); x = e; } }); return s; }
-  const SPR = ['/////// /...l....l/.....l..l'.replace(' ',''), '/////.g/.....gg.g/......gg/......g/......g', '//.....g.g/....gggg/..g.gGgg.g/.ggggGgggg/..gggGggg/....gG/....gG/....gG'];
-  const RIPE = {
-    havuc:'/...g.gg.g/....gGgg/....gGgg/.....oo/....oOoo/....oooo/....oOoo/.....oo/.....oO',
-    cilek:'/....gggg/...gGggGg/..ggrgggrg/..grRgggrRg/...gggggg/..rgggrgg/.rRggrRgg/..gggGgg/....GG',
-    misir:'.....yy/....yYYy/....yYYy/...gyYYyg/..g.yYYy.g/.....yy/....gGGg/...gGGGGg/.....GG/.....GG',
-    aycicegi:'....y..y/..yyyyyyyy/.yykkkkkyy/.yykkkkkkyy/.yykkkkkkyy/..yykkkkyy/...yyyyyy/.....gg/..g..gg.g/...gggggg',
-    karpuz:'///.....g/...GGGGGG/..GgGgGgGG/.GgGgGgGgGG/.GgGgGgGgGG/..GgGgGgGG/...GGGGGG'
+  const AS = {tavuk:['#fff','#e0392f','#ffb347'], inek:['#fff','#2b2b33','#f4a6bd'], koyun:['#f1ece2','#4a4a55','#f4a6bd'], keci:['#e8dcc8','#5a4a3a','#fff'], ari:['#ffd23f','#222','#cfe8ff']};
+  const GOALS = [30,100,250,600,1500,4000], GRW = [80,250,700,1800,5000,15000], MAXP = 16, MAXA = 12;
+  const DEC = {
+    cicek:{n:'Çiçek bahçesi',c:150,lv:3,s:FR(5,6,1,5,'#3fae5a')+FR(4,3,3,3,'#ff7eb6')+FR(5,4,1,1,'#ffd95a')+FR(3,8,2,1,'#3fae5a')+FR(7,7,2,1,'#3fae5a')},
+    cit:{n:'Çit',c:250,lv:4,s:FR(1,4,2,7,'#b07a4a')+FR(5,4,2,7,'#b07a4a')+FR(9,4,2,7,'#b07a4a')+FR(0,5,12,1,'#8a5a3a')+FR(0,8,12,1,'#8a5a3a')},
+    kuyu:{n:'Kuyu',c:500,lv:5,s:FR(2,5,8,6,'#9a9aa6')+FR(1,4,10,1,'#6b4530')+FR(3,1,1,4,'#8a5a3a')+FR(8,1,1,4,'#8a5a3a')+FR(3,1,6,1,'#c0392b')+FR(4,7,4,3,'#4dabf7')},
+    korkuluk:{n:'Korkuluk',c:700,lv:6,s:FR(3,0,6,1,'#6b4530')+FR(4,1,4,3,'#f4d19b')+FR(5,2,1,1,'#222')+FR(7,2,1,1,'#222')+FR(5,4,2,7,'#8a5a3a')+FR(1,5,10,1,'#8a5a3a')+FR(2,6,2,2,'#c0392b')+FR(8,6,2,2,'#c0392b')},
+    agac:{n:'Elma ağacı',c:1000,lv:7,s:FR(5,7,2,4,'#8a5a3a')+FR(2,1,8,3,'#2f9a4a')+FR(1,3,10,4,'#3fae5a')+FR(4,3,1,1,'#ff4d6d')+FR(8,4,1,1,'#ff4d6d')+FR(6,5,1,1,'#ff4d6d')},
+    heykel:{n:'Kalp heykeli',c:3000,lv:10,s:FR(2,2,3,2,'#ff5c8a')+FR(7,2,3,2,'#ff5c8a')+FR(2,3,8,3,'#ff5c8a')+FR(3,6,6,1,'#ff5c8a')+FR(4,7,4,1,'#ff5c8a')+FR(5,8,2,1,'#ff5c8a')+FR(3,9,6,3,'#9a9aa6')+FR(3,2,1,1,'#fff')}
   };
-  const AN = {
-    tavuk:'/.......rr/......wwwr/......wkwwnn/......wwwwn/.....wwwww/..w.wwwwwww/..wwwwwwwww/...wwwwwwww/....wwwwww/......n.n/.....nn.nn',
-    inek:'/..kk......kk/..kwwwwwwwwk/..wwkwwwwkww/..wwwwwwwwww/..wwwppppwww/...wwppppww/...wwwwwwww/..wkkwwwwkw/..wwwwwwwww/..kk....kk/..kk....kk',
-    koyun:'/...lllllll/..lllllllll/.llllkkklll/.lllkwkwkll/.llllkkkkll/..lllllllll/..lllllllll/...lllllll/....k...k/....k...k'
-  };
-  const DROP = FSV(5,7,px(['..u','.uuu','uuuuu','uuuuu','.uuu'],5));
-  const COIN = FSV(6,6,px(['.yyyy','yYYYYy','yYyyYy','yYyyYy','yYYYYy','.yyyy'],6));
+  const fruit = (k,c,gr)=>({
+    root:FR(4,4,4,1,gr)+FR(5,2,2,2,gr)+FR(4,5,4,2,c)+FR(5,7,2,2,c)+FR(5,9,1,1,c),
+    dot:FR(3,3,2,2,c)+FR(7,4,2,2,c)+FR(5,6,2,2,c)+FR(3,3,1,1,'#fff'),
+    ear:FR(5,1,2,6,c)+FR(5,1,1,2,'#fff')+FR(4,4,1,3,gr)+FR(7,4,1,3,gr),
+    sun:FR(4,1,4,4,c)+FR(3,2,1,2,c)+FR(8,2,1,2,c)+FR(5,2,2,2,'#7a4a1c'),
+    melon:FR(3,5,6,4,c)+FR(2,6,1,2,c)+FR(9,6,1,2,c)+FR(4,5,1,4,'#1f7a4a')+FR(7,5,1,4,'#1f7a4a'),
+    gourd:FR(2,6,8,3,c)+FR(3,5,6,1,c)+FR(5,4,2,1,'#3d7a2a')+FR(5,5,1,4,'#e07a1a'),
+    grape:FR(4,1,4,1,gr)+FR(4,2,4,2,c)+FR(5,4,3,2,c)+FR(6,6,1,1,c)+FR(5,2,1,1,'#c98cff'),
+    heart:FR(3,1,2,2,c)+FR(7,1,2,2,c)+FR(3,2,6,2,c)+FR(4,4,4,1,c)+FR(5,5,2,1,c)+FR(4,1,1,1,'#fff')
+  })[k];
   function cropSvg(c, st){
-    let b = FR(0,0,12,12,'#9a6a44')+[3,7,11].map(y=>FR(0,y,12,1,'#7d5236')).join('')+FR(2,1,1,1,'#b07a52')+FR(8,5,1,1,'#b07a52')+FR(4,9,1,1,'#b07a52');
-    if(c) b += px((st==3 ? RIPE[c] : SPR[st]).split('/'), 12);
+    let b = FR(0,0,12,12,'#8a5a3a')+FR(0,10,12,2,'#6b4530')+FR(1,3,2,1,'#7a4f32')+FR(9,6,2,1,'#7a4f32'), gr = '#3fae5a';
+    if(!c) return FSV(12,12,b);
+    if(st==0) b += FR(3,9,1,1,'#3d2a1c')+FR(7,8,1,1,'#3d2a1c')+FR(5,10,1,1,'#3d2a1c');
+    else if(st==1) b += FR(5,6,1,4,gr)+FR(4,6,1,1,gr)+FR(6,5,1,1,gr);
+    else if(st==2) b += FR(5,3,2,7,gr)+FR(3,5,2,1,gr)+FR(7,4,2,1,gr)+FR(3,7,2,1,gr)+FR(7,7,2,1,gr);
+    else { const k = CROPS[c].k; if(k!='melon'&&k!='gourd'&&k!='root') b += FR(5,3,2,7,gr)+FR(3,7,2,1,gr)+FR(7,6,2,1,gr); b += fruit(k,CROPS[c].col,gr); }
     return FSV(12,12,b);
   }
-  function animSvg(t){ return FSV(14,12, FR(0,0,14,12,'#8fd07a')+FR(0,10,14,2,'#6fb862')+px(AN[t].split('/'),14)); }
-    const fkey = w=>'farm-'+w+'.json', flk = w=>'farmc-'+w, LV = s=>Math.floor(Math.sqrt(s.xp/12))+1;
+  function animSvg(t){
+    const [b,a,n] = AS[t]; let s = FR(0,0,14,12,'#8fd07a')+FR(0,10,14,2,'#6fb862');
+    if(t=='ari') return FSV(14,12,s+FR(4,4,6,4,b)+FR(5,4,1,4,a)+FR(8,4,1,4,a)+FR(5,2,2,2,n)+FR(8,2,2,2,n)+FR(10,5,1,1,a)+FR(3,6,1,1,a)+FR(6,10,3,1,'#c9a86a'));
+    s += FR(3,5,7,4,b)+FR(9,3,3,3,b)+FR(4,9,1,2,a)+FR(8,9,1,2,a)+FR(11,4,1,1,'#222');
+    if(t=='tavuk') s += FR(10,2,2,1,a)+FR(12,4,1,1,n)+FR(2,4,1,2,b);
+    if(t=='inek') s += FR(4,5,2,2,a)+FR(7,6,2,2,a)+FR(12,5,1,1,n)+FR(9,2,1,1,a)+FR(11,2,1,1,a);
+    if(t=='koyun') s += FR(2,4,9,5,b)+FR(3,3,6,1,b)+FR(9,3,3,4,a)+FR(11,4,1,1,'#fff');
+    if(t=='keci') s += FR(10,1,1,2,a)+FR(12,1,1,2,a)+FR(12,6,1,2,n)+FR(2,5,1,1,b);
+    return FSV(14,12,s);
+  }
+  const ftm = ms=>{ const m = Math.max(1,Math.ceil(ms/60000)); return m<60 ? m+' dk' : Math.floor(m/60)+' sa '+(m%60)+' dk'; };
+  function eta(o, need, wi, d, now){
+    const rem = need-o.g; if(rem<=0) return 0;
+    const W = Math.max(0,(o.w||0)+wi-now); if(rem<=W) return rem; if(d<=0) return -1; return W+(rem-W)/d;
+  }
+  const fkey = w=>'farm-'+w+'.json', flk = w=>'farmc-'+w, LV = s=>Math.floor(Math.sqrt(s.xp/12))+1;
   let F = null, P = null, fview = 'me', fsha, fdirty = false, ftimer, fbusy = false, fpress = 0, fint, fpi, ftt, SH = [];
   const mw = document.getElementById('menuWrap'), fbtn = document.getElementById('frmBtn');
-  const fm = mkEl('div'); fm.id = 'fm'; fm.innerHTML = '<svg id="fdec" viewBox="0 0 48 15" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges"><rect x="38" y="2" width="5" height="5" fill="#ffd95a"/><rect x="37" y="3" width="7" height="3" fill="#ffd95a"/><g fill="#fff"><rect x="4" y="4" width="9" height="2"/><rect x="6" y="3" width="5" height="1"/><rect x="20" y="8" width="8" height="2"/><rect x="22" y="7" width="4" height="1"/></g><g fill="#5fb552"><rect x="2" y="14" width="1" height="1"/><rect x="9" y="13" width="1" height="2"/><rect x="17" y="14" width="1" height="1"/><rect x="26" y="13" width="1" height="2"/><rect x="34" y="14" width="1" height="1"/><rect x="43" y="13" width="1" height="2"/></g></svg><div id="fmc"></div><div id="fs" data-k="zx"><div class="sh" id="fsh"></div></div><div id="ftoast"></div>';
+  const fm = mkEl('div'); fm.id = 'fm'; fm.innerHTML = '<div id="fmc"></div><div id="fs" data-k="zx"><div class="sh" id="fsh"></div></div><div id="ftoast"></div>';
   document.body.appendChild(fm);
   const fmc = fm.querySelector('#fmc'), fsh = fm.querySelector('#fsh'), ftoast = fm.querySelector('#ftoast'), fs = fm.querySelector('#fs');
   function ft(m){ ftoast.textContent = m; ftoast.style.opacity = 1; clearTimeout(ftt); ftt = setTimeout(()=>{ ftoast.style.opacity = 0; }, 1700); }
@@ -2868,7 +2895,7 @@ const BUILTIN = [];
     s.plots.forEach(o=>{ if(o.c) adv(o, CROPS[o.c].g*H, WI, .25, now); });
     s.an.forEach(o=>{ const d = ANIM[o.t]; adv(o, d.g*H, d.fd*H, 0, now); });
   }
-  function fnew(){ return {coins:20, xp:0, plots:[{},{},{},{}], an:[], help:[], ap:0, t:Date.now()}; }
+  function fnew(){ return {coins:20, xp:0, plots:[{},{},{},{}], an:[], help:[], ap:0, hv:0, gc:0, dec:{}, t:Date.now()}; }
   function fmark(){
     F.t = Date.now(); try{ localStorage.setItem(flk(who()), JSON.stringify(F)); }catch(e){}
     fdirty = true; clearTimeout(ftimer); ftimer = setTimeout(()=>fsave(false), 4000);
@@ -2912,21 +2939,30 @@ const BUILTIN = [];
   function gain(x){ const a = LV(F); F.xp += x; if(LV(F)>a) ft('Seviye '+LV(F)+'! Yeni şeyler açıldı 🎉'); }
   function spend(c){ if(F.coins<c){ ft('Puan yetmiyor'); return false; } F.coins -= c; return true; }
   function cell(o, d, need, wi, k, i, now, isA){
-    const r = Math.min(1, o.g/need), wet = Math.max(0, (o.w||0)+wi-now)/wi, rdy = r>=1, st = r<.25?0:r<.6?1:r<1?2:3;
-    return '<div class="fc'+(rdy?' rdy':'')+'" data-k="'+k+i+'">'+(isA?animSvg(o.t):cropSvg(o.c,st))+(wet<=0&&!rdy?'<i class="dr">'+DROP+'</i>':'')+
-      '<i class="fb"><b style="width:'+(r*100).toFixed(0)+'%"></b></i><i class="fw"><b style="width:'+(wet*100).toFixed(0)+'%"></b></i>'+(rdy?'<span>Hazır!</span>':'')+'</div>';
+    const r = Math.min(1, o.g/need), wl = Math.max(0, (o.w||0)+wi-now), wet = wl/wi, rdy = r>=1, st = r<.25?0:r<.6?1:r<1?2:3, e = eta(o,need,wi,isA?0:.25,now);
+    return '<div class="fc'+(isA?' an':'')+(rdy?' rdy':wet<=0?' dry':'')+'" data-k="'+k+i+'">'+(isA?animSvg(o.t):cropSvg(o.c,st))+
+      '<em>'+d.n+'</em><i class="fb"><b style="width:'+(r*100).toFixed(0)+'%"></b></i><i class="fw"><b style="width:'+(wet*100).toFixed(0)+'%"></b></i><span>'+(rdy?'Hazır!':e<0?(isA?'Yemle!':'Sula!'):ftm(e))+'</span></div>';
   }
   function frender(){
     if(!fm.classList.contains('open') || !F || Date.now()-fpress<700) return;
-    const now = Date.now(), me = who(), o = otherOf(me), s = fview=='me' ? F : P, L = s ? LV(s) : 1;
-    let h = '<div class="fh"><div class="pn fp">'+COIN+'<span>'+(s?s.coins:0)+' puan</span><em>Sv '+L+'</em><div class="fx"><b style="width:'+(s?(100*(s.xp-12*Math.pow(L-1,2))/(12*(2*L-1))).toFixed(0):0)+'%"></b></div></div><button class="pb fbn" data-k="x">✕</button></div>';
-    h += '<div class="ft"><button class="pb'+(fview=='me'?' on':'')+'" data-k="tm">Çiftliğim</button><button class="pb'+(fview=='ot'?' on':'')+'" data-k="to">'+NAMES[o]+'</button></div>';
+    const now = Date.now(), me = who(), o = otherOf(me), s = fview=='me' ? F : P;
+    let h = '<div class="fh"><div class="fp"><b>'+(s?s.coins:0)+'</b> puan · Seviye '+(s?LV(s):1)+'<div class="fx"><b style="width:'+(s?(100*(s.xp-12*Math.pow(LV(s)-1,2))/(12*(2*LV(s)-1))).toFixed(0):0)+'%"></b></div></div><button class="fbn" data-k="x">✕</button></div>';
+    h += '<div class="ft"><button data-k="tm" class="'+(fview=='me'?'on':'')+'">Çiftliğim</button><button data-k="to" class="'+(fview=='ot'?'on':'')+'">'+NAMES[o]+'</button></div>';
     if(!s){ fmc.innerHTML = h+'<p class="hint">'+NAMES[o]+' henüz çiftliğini açmamış.</p>'; return; }
     advAll(s, now);
-    h += '<div class="fl">Tarlalar</div><div class="fg">'+s.plots.map((p,i)=>p.c ? cell(p,CROPS[p.c],CROPS[p.c].g*H,WI,'p',i,now,false) : '<div class="fc e" data-k="p'+i+'">'+cropSvg(null,0)+(fview=='me'?'<span>+</span>':'')+'</div>').join('')+'</div>';
-    h += '<div class="fl">Hayvanlar</div>'+(s.an.length ? '<div class="fg">'+s.an.map((p,i)=>cell(p,ANIM[p.t],ANIM[p.t].g*H,ANIM[p.t].fd*H,'a',i,now,true)).join('')+'</div>' : '<p class="hint" style="margin-top:0">Henüz hayvan yok'+(fview=='me'?' · Dükkan’dan alabilirsin (Seviye 2).':'.')+'</p>');
-    h += fview=='me' ? '<div class="fa"><button class="pb" data-k="wa">Hepsini sula</button><button class="pb" data-k="ha">Hepsini topla</button><button class="pb" data-k="sh">Dükkan</button></div><p class="hint">Sulama 6 saat yeter (hayvan yemi 8-12 saat). Kuruyunca büyüme yavaşlar ama bitki ölmez.</p>'
-      : '<p class="hint">Dokun: sula / yemle (yardım başına +3 puan). '+NAMES[o]+' açınca görür.</p>';
+    let nx = 1e15, nn = '';
+    const chk = (x,d,wi,dd)=>{ const e = eta(x,d,wi,dd,now); if(e>=0 && e<nx){ nx = e; nn = (x.c?CROPS[x.c]:ANIM[x.t]).n; } };
+    s.plots.forEach(p=>p.c && chk(p,CROPS[p.c].g*H,WI,.25)); s.an.forEach(p=>chk(p,ANIM[p.t].g*H,ANIM[p.t].fd*H,0));
+    const dc = Object.keys(DEC).filter(k=>s.dec && s.dec[k]).map(k=>FSV(12,12,DEC[k].s)).join('');
+    h += '<div class="fsc"><i class="sn"></i><i class="cl"></i>'+(dc||'<small>Süs alarak çiftliği güzelleştir</small>')+'</div>';
+    h += '<div class="fnx">⏱ '+(nx<1e15 ? (nx==0 ? nn+' hazır!' : 'Sıradaki: '+nn+' · '+ftm(nx)) : 'Ekin ya da hayvan yok')+'</div>';
+    h += '<div class="fl">Tarlalar</div><div class="fg">'+s.plots.map((p,i)=>p.c ? cell(p,CROPS[p.c],CROPS[p.c].g*H,WI,'p',i,now,false) : '<div class="fc e" data-k="p'+i+'"><span>'+(fview=='me'?'+ Ek':'boş')+'</span></div>').join('')+'</div>';
+    h += '<div class="fl">Hayvanlar</div><div class="fg">'+(s.an.length ? s.an.map((p,i)=>cell(p,ANIM[p.t],ANIM[p.t].g*H,ANIM[p.t].fd*H,'a',i,now,true)).join('') : '<p class="hint" style="grid-column:1/-1">Henüz hayvan yok'+(fview=='me'?' · Dükkan’dan alabilirsin (Seviye 2).':'.')+'</p>')+'</div>';
+    if(fview=='me'){
+      const tot = (F.hv||0)+(P?P.hv||0:0), gi = F.gc||0, done = gi>=GOALS.length, gt = GOALS[Math.min(gi,GOALS.length-1)];
+      h += '<div class="fl">Ortak hedef</div><div class="fgl"><div class="fx"><b style="width:'+(done?100:Math.min(100,100*tot/gt))+'%"></b></div><small>'+(done?'Tüm hedefler tamam 🎉 ('+tot+' hasat)':'Birlikte '+tot+' / '+gt+' hasat · ödül '+GRW[gi]+' puan')+'</small>'+(!done&&tot>=gt?'<button data-k="gk">Ödülü al</button>':'')+'</div>';
+      h += '<div class="fa"><button data-k="wa">Hepsini sula</button><button data-k="ha">Hepsini topla</button><button data-k="sh">Dükkan</button></div><p class="hint">Sulama 6 saat yeter (hayvan yemi 8-18 saat). Kuruyunca büyüme yavaşlar ama bitki ölmez. Uzun ekinler daha çok kazandırır.</p>';
+    } else h += '<p class="hint">Dokun: sula / yemle 💧 (yardım başına +3 puan). '+NAMES[o]+' açınca görür.</p>';
     fmc.innerHTML = h;
   }
   function fSheet(title, items){
@@ -2940,8 +2976,9 @@ const BUILTIN = [];
   }
   function shop(){
     const L = LV(F), it = [];
-    if(F.plots.length<12){ const c = 60*Math.pow(2, F.plots.length-4); it.push({t:'Yeni tarla', d:(F.plots.length+1)+'. tarla', c, lock:'', f:()=>{ if(spend(c)) F.plots.push({}); }}); }
-    Object.keys(ANIM).forEach(id=>{ const d = ANIM[id]; it.push({t:d.n, d:d.g+' saatte 1 '+d.pr+' · satış '+d.s+' puan', c:d.c, lock:L<d.lv?'Seviye '+d.lv:'', f:()=>{ if(F.an.length>=8) return ft('Ahır dolu'); if(spend(d.c)) F.an.push({t:id, g:0, l:Date.now(), w:0}); }}); });
+    if(F.plots.length<MAXP){ const n = F.plots.length, c = Math.round(60*Math.pow(1.75,n-4)); it.push({t:'Yeni tarla', d:(n+1)+'. tarla ('+n+'/'+MAXP+')', c, lock:'', f:()=>{ if(spend(c)) F.plots.push({}); }}); }
+    Object.keys(ANIM).forEach(id=>{ const d = ANIM[id]; it.push({t:d.n, d:d.g+' saatte 1 '+d.pr+' · satış '+d.s+' puan', c:d.c, lock:L<d.lv?'Seviye '+d.lv:'', f:()=>{ if(F.an.length>=MAXA) return ft('Ahır dolu'); if(spend(d.c)) F.an.push({t:id, g:0, l:Date.now(), w:0}); }}); });
+    Object.keys(DEC).forEach(id=>{ const d = DEC[id], own = F.dec && F.dec[id]; it.push({t:'🎀 '+d.n, d:'Çiftliğini süsler', c:d.c, lock:own?'Alındı':L<d.lv?'Seviye '+d.lv:'', f:()=>{ if(spend(d.c)){ F.dec = F.dec||{}; F.dec[id] = 1; gain(6); } }}); });
     fSheet('Dükkan', it);
   }
   function help(c, i, now){
@@ -2958,13 +2995,13 @@ const BUILTIN = [];
     if(c=='p'){
       const o = F.plots[i]; if(!o.c) return seeds(i);
       const d = CROPS[o.c];
-      if(o.g>=d.g*H){ F.coins += d.s; gain(Math.ceil(d.c/2)+2); F.plots[i] = {}; ft('+'+d.s+' puan'); }
-      else if((o.w||0)+WI-now>WI*.85) return ft('Zaten sulu 💧');
+      if(o.g>=d.g*H){ F.coins += d.s; F.hv=(F.hv||0)+1; gain(Math.ceil(d.c/2)+2); F.plots[i] = {}; ft('+'+d.s+' puan'); }
+      else if((o.w||0)+WI-now>WI*.85) return ft('Zaten sulu 💧 '+ftm((o.w||0)+WI-now)+' kaldı');
       else { o.w = now; gain(1); ft('Sulandı 💧'); }
     } else {
       const o = F.an[i], d = ANIM[o.t];
-      if(o.g>=d.g*H){ F.coins += d.s; gain(3); o.g = 0; o.l = now; ft('+'+d.s+' puan · '+d.pr); }
-      else if((o.w||0)+d.fd*H-now>d.fd*H*.85) return ft('Tok');
+      if(o.g>=d.g*H){ F.coins += d.s; F.hv=(F.hv||0)+1; gain(3); o.g = 0; o.l = now; ft('+'+d.s+' puan · '+d.pr); }
+      else if((o.w||0)+d.fd*H-now>d.fd*H*.85) return ft('Tok · '+ftm((o.w||0)+d.fd*H-now)+' kaldı');
       else { o.w = now; gain(1); ft('Yemlendi'); }
     }
     fmark(); frender();
@@ -2972,10 +3009,10 @@ const BUILTIN = [];
   function bulk(water){
     const now = Date.now(); advAll(F, now); let n = 0, m = 0;
     F.plots.forEach((o,i)=>{ if(!o.c) return; const d = CROPS[o.c];
-      if(o.g>=d.g*H && !water){ F.coins += d.s; gain(Math.ceil(d.c/2)+2); F.plots[i] = {}; m += d.s; }
+      if(o.g>=d.g*H && !water){ F.coins += d.s; F.hv=(F.hv||0)+1; gain(Math.ceil(d.c/2)+2); F.plots[i] = {}; m += d.s; }
       else if(water && (o.w||0)+WI-now<=WI*.85){ o.w = now; gain(1); n++; } });
     F.an.forEach(o=>{ const d = ANIM[o.t];
-      if(o.g>=d.g*H && !water){ F.coins += d.s; gain(3); o.g = 0; o.l = now; m += d.s; }
+      if(o.g>=d.g*H && !water){ F.coins += d.s; F.hv=(F.hv||0)+1; gain(3); o.g = 0; o.l = now; m += d.s; }
       else if(water && (o.w||0)+d.fd*H-now<=d.fd*H*.85){ o.w = now; gain(1); n++; } });
     ft(water ? (n ? n+' yer sulandı/yemlendi 💧' : 'Hepsi zaten sulu') : (m ? '+'+m+' puan' : 'Toplanacak bir şey yok'));
     fmark(); frender();
@@ -2987,9 +3024,10 @@ const BUILTIN = [];
     if(/^[pa]\d+$/.test(k)) farmAct(k);
     else if(k=='x') fclose();
     else if(k=='tm'||k=='to'){ fview = k=='tm' ? 'me' : 'ot'; fpress = 0; frender(); if(fview=='ot') fpoll().then(frender); }
+    else if(k=='gk'){ const gi = F.gc||0, tot = (F.hv||0)+(P?P.hv||0:0); if(gi<GOALS.length && tot>=GOALS[gi]){ F.coins += GRW[gi]; F.gc = gi+1; gain(10); ft('Ortak hedef ödülü +'+GRW[gi]+' 🎉'); fmark(); frender(); } }
     else if(k=='wa') bulk(true); else if(k=='ha') bulk(false); else if(k=='sh') shop();
     else if(k=='zx'){ if(e.target===fs) fs.classList.remove('open'); }
-    else if(k[0]=='z'){ const it = SH[+k.slice(1)]; if(!it) return; if(it.lock) return ft(it.lock+' gerekli'); it.f(); fs.classList.remove('open'); fmark(); fpress = 0; frender(); }
+    else if(k[0]=='z'){ const it = SH[+k.slice(1)]; if(!it) return; if(it.lock) return ft(/^Sev/.test(it.lock)?it.lock+' gerekli':'Zaten var'); it.f(); fs.classList.remove('open'); fmark(); fpress = 0; frender(); }
   };
   fbtn.onclick = ()=>{
     mw.classList.remove('open'); document.getElementById('menuBtn').setAttribute('aria-expanded','false');
@@ -3005,7 +3043,7 @@ const BUILTIN = [];
       if(s){ advAll(s, n);
         d = s.plots.some(o=>o.c && (o.g>=CROPS[o.c].g*H || (o.w||0)+WI<n)) || s.an.some(o=>o.g>=ANIM[o.t].g*H || (o.w||0)+ANIM[o.t].fd*H<n); }
     }catch(e){}
-    mw.classList.toggle('fd', d); fbtn.classList.toggle('fd', d);
+    fbtn.classList.toggle('fd', d);
   }
   document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState=='hidden') fsave(true); });
   window.addEventListener('pagehide', ()=>fsave(true));
