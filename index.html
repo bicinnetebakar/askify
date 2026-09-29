@@ -2661,6 +2661,7 @@ const BUILTIN = [];
   function hvLayout(){
     const Wp = hv.clientWidth || innerWidth, Hp = hv.clientHeight || innerHeight;
     const sc = Math.min(Wp/84, Hp/58, 6);
+    HV.ext = null;
     HV.w = Wp/sc; HV.h = Hp/sc; HV.x0 = 33 - HV.w/2; HV.y0 = 27 - HV.h*0.56;
     hvAv.setAttribute('viewBox', HV.x0.toFixed(2)+' '+HV.y0.toFixed(2)+' '+HV.w.toFixed(2)+' '+HV.h.toFixed(2));
   }
@@ -2673,9 +2674,14 @@ const BUILTIN = [];
     let o = '';
     if(sceneKey && (top>0.2 || bot>0.2)){
       // üst/alt boşluk: sahnenin kenar satırı uzatılır, yatay bulanıklıkla çizgi/leke kalmaz
-      if(!HV.ext || frame%4===0){
+      if(!HV.ext || frame%40===0){
         const sx2 = vbx0, sw2 = vbw, sd2 = avatarDancing; avatarDancing = false; vbx0 = X-40; vbw = W+80;
-        try{ HV.ext = sceneSvg(); }finally{ vbx0 = sx2; vbw = sw2; avatarDancing = sd2; }
+        try{
+          // sadece tam genişlikteki zemin bantları alınır; kalp, yıldız, bulut, kar gibi hareketli şeyler
+          // uzatılınca dikey ışık çizgisi yaptığı için dışarıda bırakılır
+          const full = 'width="'+(W+80)+'"';
+          HV.ext = (sceneSvg().match(/<rect [^>]*\/>/g)||[]).filter(r=>r.indexOf(full)>=0).join('');
+        }finally{ vbx0 = sx2; vbw = sw2; avatarDancing = sd2; }
       }
       const ex = X-40, ew = W+80;
       o += '<defs><filter id="hvbl" filterUnits="userSpaceOnUse" x="'+ex+'" y="'+(HV.y0-5)+'" width="'+ew+'" height="'+(HV.h+10)+'"><feGaussianBlur stdDeviation="7 0"/></filter></defs>';
