@@ -282,37 +282,42 @@
   #dlg input[type=date], #dlg input[type=time]{ width:100%; padding:12px 14px; border:1.5px solid var(--border); border-radius:12px; background:var(--bg); color:var(--ink); font:inherit; font-size:1rem; outline:none; box-sizing:border-box; }
   #dlg input[type=date]:focus, #dlg input[type=time]:focus{ border-color:var(--rose); }
   /* --- çiftlik --- */
-  #dayRow{ display:flex; align-items:flex-start; gap:8px; width:max-content; }
-  #frmBtn{ position:relative; flex:none; width:40px; height:40px; padding:0; border-radius:14px; border:1px solid var(--border); background:var(--card); box-shadow:0 3px 10px rgba(196,96,125,.15); cursor:pointer; font-size:1.15rem; line-height:1; -webkit-tap-highlight-color:transparent; transition:transform .15s; }
-  #frmBtn:active{ transform:scale(.9); }
-  #frmBtn.fd::after{ content:''; position:absolute; top:-3px; right:-3px; width:10px; height:10px; border-radius:50%; background:#4dabf7; border:2px solid var(--bg); }
-  #fm{ display:none; position:fixed; inset:0; z-index:50; background:var(--bg); color:var(--ink); flex-direction:column; padding:calc(14px + env(safe-area-inset-top,0px)) 14px calc(14px + env(safe-area-inset-bottom,0px)); overflow-y:auto; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; }
+  #menuWrap.open #menuList button:nth-child(6){ transition-delay:.35s; }
+  #frmBtn .mi{ position:relative; }
+  #frmBtn.fd .mi::after{ content:''; position:absolute; top:-2px; right:-3px; width:9px; height:9px; border-radius:50%; background:#4dabf7; }
+  #menuWrap.fd #menuBtn{ box-shadow:0 0 0 2px #4dabf7; }
+  #fm{ display:none; position:fixed; inset:0; z-index:50; background:linear-gradient(#9ddcff 0,#9ddcff 150px,#7ccf6e 150px,#7ccf6e 100%); color:#5a3a22; flex-direction:column; padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px)); overflow-y:auto; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; font-family:ui-monospace,'Courier New',monospace; font-weight:700; }
   #fm.open{ display:flex; }
-  #fmc{ width:100%; max-width:520px; margin:0 auto; }
-  .fh{ display:flex; gap:8px; align-items:center; margin-bottom:10px; }
-  .fp{ flex:1; padding:8px 12px; border-radius:14px; background:var(--card); border:1px solid var(--border); color:var(--rose-dark); font-size:.85rem; }
-  .fx{ height:5px; margin-top:5px; border-radius:3px; background:var(--card2); overflow:hidden; } .fx b{ display:block; height:100%; background:var(--rose); }
-  .fbn, .fa button, .ft button{ padding:10px 14px; border-radius:14px; border:1px solid var(--border); background:var(--card); color:var(--rose-dark); font:inherit; font-size:.9rem; cursor:pointer; }
-  .fbn{ width:40px; height:40px; padding:0; }
-  .ft{ display:flex; gap:8px; margin-bottom:8px; } .ft button{ flex:1; } .ft button.on{ border-color:var(--rose); background:var(--card2); font-weight:700; }
-  .fl{ margin:12px 0 6px; font-size:.8rem; color:var(--ink-dim); }
-  .fg{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
-  .fc{ position:relative; aspect-ratio:1; border-radius:10px; overflow:hidden; border:2px solid transparent; background:#7a5238; cursor:pointer; }
-  .fc.e{ background:var(--card2); border:2px dashed var(--border); display:flex; align-items:center; justify-content:center; }
-  .fc svg{ width:100%; height:100%; display:block; }
-  .fc span{ position:absolute; top:2px; left:0; right:0; text-align:center; font-size:.6rem; color:#fff; text-shadow:0 1px 2px #000; }
-  .fc.e span{ position:static; color:var(--ink-dim); text-shadow:none; font-size:.75rem; }
-  .fb, .fw{ position:absolute; left:4px; right:4px; height:4px; border-radius:2px; background:rgba(0,0,0,.4); overflow:hidden; }
-  .fb{ bottom:12px; } .fw{ bottom:5px; } .fb b, .fw b{ display:block; height:100%; } .fb b{ background:#7ddc6a; } .fw b{ background:#4dabf7; }
-  .fc.rdy{ border-color:#ffd95a; animation:dpulse 1s infinite; }
-  .fc.dry::after{ content:'💧'; position:absolute; right:2px; top:14px; font-size:.75rem; }
-  .fa{ display:flex; gap:8px; margin-top:14px; } .fa button{ flex:1; padding:12px 6px; }
-  #fs{ display:none; position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.4); align-items:flex-end; } #fs.open{ display:flex; }
-  #fsh{ width:100%; max-width:520px; margin:0 auto; background:var(--card); border-radius:18px 18px 0 0; padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px)); max-height:70%; overflow-y:auto; }
-  #fsh h3{ margin:0 0 8px; color:var(--rose-dark); }
-  .si{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:11px 12px; margin-bottom:6px; border-radius:12px; background:var(--card2); cursor:pointer; }
-  .si small{ display:block; color:var(--ink-dim); font-size:.75rem; } .si span{ color:var(--rose-dark); font-size:.85rem; white-space:nowrap; } .si.lk{ opacity:.5; }
-  #ftoast{ position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:70; padding:8px 14px; border-radius:14px; background:var(--card); border:1px solid var(--border); color:var(--rose-dark); font-size:.85rem; opacity:0; transition:opacity .25s; pointer-events:none; max-width:90%; text-align:center; }
+  #fdec{ position:absolute; top:0; left:0; width:100%; height:150px; pointer-events:none; }
+  #fmc{ position:relative; z-index:1; width:100%; max-width:520px; margin:0 auto; }
+  .pn, .pb, .fc, #fsh, .si, #fmt, .fl{ box-shadow:0 -3px 0 #5a3a22, 0 3px 0 #5a3a22, -3px 0 0 #5a3a22, 3px 0 0 #5a3a22; }
+  .pn{ background:#fff4de; margin:3px; } .pb{ background:#ffb3c8; color:#5a3a22; font:inherit; font-size:.85rem; border:0; margin:3px; cursor:pointer; padding:10px 6px; }
+  .pb:active, .si:active{ transform:translateY(2px); } .pb.on{ background:#ffd95a; }
+  .fh{ display:flex; gap:12px; align-items:center; margin-bottom:14px; }
+  .fp{ flex:1; padding:8px 10px; display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; font-size:.9rem; }
+  .fp svg{ width:20px; height:20px; } .fp em{ font-style:normal; margin-left:auto; background:#ff8fb1; color:#fff; padding:1px 6px; }
+  .fx{ flex:0 0 100%; height:8px; background:#5a3a22; padding:1px; } .fx b{ display:block; height:100%; background:#ffd95a; }
+  .fbn{ width:44px; height:44px; padding:0; flex:none; }
+  .ft{ display:flex; gap:10px; margin-bottom:6px; } .ft .pb{ flex:1; }
+  .fl{ display:inline-block; margin:18px 0 12px 3px; padding:3px 10px; background:#b98550; color:#fff4de; font-size:.8rem; }
+  .fg{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; padding:0 3px; }
+  .fc{ position:relative; aspect-ratio:1; overflow:hidden; cursor:pointer; background:#9a6a44; }
+  .fc svg{ width:100%; height:100%; display:block; image-rendering:pixelated; }
+  .fc.e span{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:#fff4de; text-shadow:0 2px 0 #5a3a22; }
+  .fc span{ position:absolute; top:0; left:0; padding:0 4px; font-size:.6rem; color:#fff; background:#5a3a22; }
+  .fb, .fw{ position:absolute; left:3px; right:3px; height:6px; background:#5a3a22; padding:1px; box-sizing:border-box; }
+  .fb{ bottom:11px; } .fw{ bottom:3px; } .fb b, .fw b{ display:block; height:100%; } .fb b{ background:#7ddc6a; } .fw b{ background:#5fc4ff; }
+  .fc.rdy{ animation:fbounce .7s steps(2) infinite; } .fc.rdy span{ background:#ff4d6d; }
+  @keyframes fbounce{ 50%{ transform:translateY(-3px); } }
+  .dr{ position:absolute; right:3px; top:3px; width:14px; height:18px; } .dr svg{ width:100%; height:100%; }
+  .fa{ display:flex; gap:10px; margin-top:22px; } .fa .pb{ flex:1; }
+  #fm .hint{ margin:16px 3px 0; padding:8px 10px; background:#fff4de; box-shadow:0 -3px 0 #5a3a22, 0 3px 0 #5a3a22, -3px 0 0 #5a3a22, 3px 0 0 #5a3a22; font-size:.72rem; line-height:1.4; color:#5a3a22; }
+  #fs{ display:none; position:fixed; inset:0; z-index:60; background:rgba(60,40,20,.5); align-items:flex-end; } #fs.open{ display:flex; }
+  #fsh{ width:100%; max-width:520px; margin:0 auto 6px; background:#fff4de; padding:14px; max-height:70%; overflow-y:auto; }
+  #fsh h3{ margin:0 0 10px; color:#5a3a22; font-size:1rem; }
+  .si{ display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px; margin:0 3px 12px; background:#ffe3c2; cursor:pointer; }
+  .si small{ display:block; color:#8a6a4a; font-size:.68rem; } .si span{ color:#c2264a; font-size:.8rem; white-space:nowrap; } .si.lk{ opacity:.55; }
+  #fmt{ position:fixed; left:50%; bottom:calc(28px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:70; padding:8px 14px; background:#fff4de; color:#5a3a22; font-size:.8rem; opacity:0; transition:opacity .25s; pointer-events:none; max-width:86%; text-align:center; }
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -326,9 +331,9 @@
 </head>
 <body>
 <div class="app">
-  <div id="menuWrap"><button id="menuBtn" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button><div id="menuList"><button id="albBtn" aria-label="Albüm"><span class="mi">📷</span><span>Albüm</span></button><button id="listBtn" aria-label="Listeler"><span class="mi">📝</span><span>Listeler</span></button><button id="statBtn" aria-label="Dinlenmeler"><span class="mi">📊</span><span>Dinlenmeler</span></button><button id="msgBtn" aria-label="Mesaj"><span class="mi">💌</span><span>Mesaj</span></button><button id="setBtn" aria-label="Ayarlar"><span class="mi">⚙️</span><span>Ayarlar</span></button></div></div>
+  <div id="menuWrap"><button id="menuBtn" aria-label="Menü" aria-expanded="false"><span></span><span></span><span></span></button><div id="menuList"><button id="albBtn" aria-label="Albüm"><span class="mi">📷</span><span>Albüm</span></button><button id="listBtn" aria-label="Listeler"><span class="mi">📝</span><span>Listeler</span></button><button id="statBtn" aria-label="Dinlenmeler"><span class="mi">📊</span><span>Dinlenmeler</span></button><button id="msgBtn" aria-label="Mesaj"><span class="mi">💌</span><span>Mesaj</span></button><button id="frmBtn" aria-label="Çiftlik"><span class="mi">🌾</span><span>Çiftlik</span></button><button id="setBtn" aria-label="Ayarlar"><span class="mi">⚙️</span><span>Ayarlar</span></button></div></div>
   <button id="heartBtn" aria-label="Kalpler" title="Kalpler">❤️</button>
-  <div id="leftCol"><div id="dayRow"><div id="dayc" title="Dokun: yıl / ay / gün"><span class="n" id="dayN"></span><span class="l" id="dayL"></span></div><button id="frmBtn" aria-label="Çiftlik" title="Çiftlik">🌾</button></div><button class="mini" id="cdChip" style="display:none"></button></div>
+  <div id="leftCol"><div id="dayc" title="Dokun: yıl / ay / gün"><span class="n" id="dayN"></span><span class="l" id="dayL"></span></div><button class="mini" id="cdChip" style="display:none"></button></div>
   <div class="title">
     <h1>Aşkify</h1>
     <p>Beni hatırla</p>
@@ -2825,27 +2830,33 @@ const BUILTIN = [];
     koyun:{n:'Koyun',c:600,lv:6,fd:12,g:18,s:150,pr:'yün'}
   };
   const AS = {tavuk:['#fff','#e0392f','#ffb347'], inek:['#fff','#2b2b33','#f4a6bd'], koyun:['#f1ece2','#4a4a55','#f4a6bd']};
+  const PAL = {g:'#5cbf4a',G:'#2f8a3a',o:'#ff9a3d',O:'#d9611f',r:'#ff4d6d',R:'#b81f45',y:'#ffd95a',Y:'#e0a800',w:'#fff',k:'#3d2a1c',p:'#ffb3c8',l:'#efe6d2',n:'#ffb347',u:'#5fc4ff'};
+  function px(rows, w){ let s = ''; rows.forEach((r,y)=>{ let x = 0; while(x<w){ const c = r[x]||'.'; if(c=='.'){ x++; continue; } let e = x; while(e<w && (r[e]||'.')==c) e++; s += FR(x,y,e-x,1,PAL[c]); x = e; } }); return s; }
+  const SPR = ['/////// /...l....l/.....l..l'.replace(' ',''), '/////.g/.....gg.g/......gg/......g/......g', '//.....g.g/....gggg/..g.gGgg.g/.ggggGgggg/..gggGggg/....gG/....gG/....gG'];
+  const RIPE = {
+    havuc:'/...g.gg.g/....gGgg/....gGgg/.....oo/....oOoo/....oooo/....oOoo/.....oo/.....oO',
+    cilek:'/....gggg/...gGggGg/..ggrgggrg/..grRgggrRg/...gggggg/..rgggrgg/.rRggrRgg/..gggGgg/....GG',
+    misir:'.....yy/....yYYy/....yYYy/...gyYYyg/..g.yYYy.g/.....yy/....gGGg/...gGGGGg/.....GG/.....GG',
+    aycicegi:'....y..y/..yyyyyyyy/.yykkkkkyy/.yykkkkkkyy/.yykkkkkkyy/..yykkkkyy/...yyyyyy/.....gg/..g..gg.g/...gggggg',
+    karpuz:'///.....g/...GGGGGG/..GgGgGgGG/.GgGgGgGgGG/.GgGgGgGgGG/..GgGgGgGG/...GGGGGG'
+  };
+  const AN = {
+    tavuk:'/.......rr/......wwwr/......wkwwnn/......wwwwn/.....wwwww/..w.wwwwwww/..wwwwwwwww/...wwwwwwww/....wwwwww/......n.n/.....nn.nn',
+    inek:'/..kk......kk/..kwwwwwwwwk/..wwkwwwwkww/..wwwwwwwwww/..wwwppppwww/...wwppppww/...wwwwwwww/..wkkwwwwkw/..wwwwwwwww/..kk....kk/..kk....kk',
+    koyun:'/...lllllll/..lllllllll/.llllkkklll/.lllkwkwkll/.llllkkkkll/..lllllllll/..lllllllll/...lllllll/....k...k/....k...k'
+  };
+  const DROP = FSV(5,7,px(['..u','.uuu','uuuuu','uuuuu','.uuu'],5));
+  const COIN = FSV(6,6,px(['.yyyy','yYYYYy','yYyyYy','yYyyYy','yYYYYy','.yyyy'],6));
   function cropSvg(c, st){
-    let b = FR(0,0,12,12,'#8a5a3a')+FR(0,10,12,2,'#6b4530'), gr = '#3fae5a';
-    if(!c) return FSV(12,12,b);
-    if(st==0) b += FR(3,9,1,1,'#3d2a1c')+FR(7,8,1,1,'#3d2a1c')+FR(5,10,1,1,'#3d2a1c');
-    else if(st==1) b += FR(5,6,1,4,gr)+FR(4,6,1,1,gr)+FR(6,5,1,1,gr);
-    else b += FR(5,3,2,7,gr)+FR(3,5,2,1,gr)+FR(7,4,2,1,gr)+FR(3,7,2,1,gr)+FR(7,7,2,1,gr);
-    if(st==3) b += FR(4,1,4,3,CROPS[c].col)+FR(3,2,1,1,CROPS[c].col)+FR(8,2,1,1,CROPS[c].col)+FR(4,1,1,1,'#fff');
+    let b = FR(0,0,12,12,'#9a6a44')+[3,7,11].map(y=>FR(0,y,12,1,'#7d5236')).join('')+FR(2,1,1,1,'#b07a52')+FR(8,5,1,1,'#b07a52')+FR(4,9,1,1,'#b07a52');
+    if(c) b += px((st==3 ? RIPE[c] : SPR[st]).split('/'), 12);
     return FSV(12,12,b);
   }
-  function animSvg(t){
-    const [b,a,n] = AS[t]; let s = FR(0,0,14,12,'#8fd07a')+FR(0,10,14,2,'#6fb862');
-    s += FR(3,5,7,4,b)+FR(9,3,3,3,b)+FR(4,9,1,2,a)+FR(8,9,1,2,a)+FR(11,4,1,1,'#222');
-    if(t=='tavuk') s += FR(10,2,2,1,a)+FR(12,4,1,1,n)+FR(2,4,1,2,b);
-    if(t=='inek') s += FR(4,5,2,2,a)+FR(7,6,2,2,a)+FR(12,5,1,1,n)+FR(9,2,1,1,a)+FR(11,2,1,1,a);
-    if(t=='koyun') s += FR(2,4,9,5,b)+FR(3,3,6,1,b)+FR(9,3,3,4,a)+FR(11,4,1,1,'#fff');
-    return FSV(14,12,s);
-  }
-  const fkey = w=>'farm-'+w+'.json', flk = w=>'farmc-'+w, LV = s=>Math.floor(Math.sqrt(s.xp/12))+1;
+  function animSvg(t){ return FSV(14,12, FR(0,0,14,12,'#8fd07a')+FR(0,10,14,2,'#6fb862')+px(AN[t].split('/'),14)); }
+    const fkey = w=>'farm-'+w+'.json', flk = w=>'farmc-'+w, LV = s=>Math.floor(Math.sqrt(s.xp/12))+1;
   let F = null, P = null, fview = 'me', fsha, fdirty = false, ftimer, fbusy = false, fpress = 0, fint, fpi, ftt, SH = [];
   const mw = document.getElementById('menuWrap'), fbtn = document.getElementById('frmBtn');
-  const fm = mkEl('div'); fm.id = 'fm'; fm.innerHTML = '<div id="fmc"></div><div id="fs" data-k="zx"><div class="sh" id="fsh"></div></div><div id="ftoast"></div>';
+  const fm = mkEl('div'); fm.id = 'fm'; fm.innerHTML = '<svg id="fdec" viewBox="0 0 48 15" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges"><rect x="38" y="2" width="5" height="5" fill="#ffd95a"/><rect x="37" y="3" width="7" height="3" fill="#ffd95a"/><g fill="#fff"><rect x="4" y="4" width="9" height="2"/><rect x="6" y="3" width="5" height="1"/><rect x="20" y="8" width="8" height="2"/><rect x="22" y="7" width="4" height="1"/></g><g fill="#5fb552"><rect x="2" y="14" width="1" height="1"/><rect x="9" y="13" width="1" height="2"/><rect x="17" y="14" width="1" height="1"/><rect x="26" y="13" width="1" height="2"/><rect x="34" y="14" width="1" height="1"/><rect x="43" y="13" width="1" height="2"/></g></svg><div id="fmc"></div><div id="fs" data-k="zx"><div class="sh" id="fsh"></div></div><div id="ftoast"></div>';
   document.body.appendChild(fm);
   const fmc = fm.querySelector('#fmc'), fsh = fm.querySelector('#fsh'), ftoast = fm.querySelector('#ftoast'), fs = fm.querySelector('#fs');
   function ft(m){ ftoast.textContent = m; ftoast.style.opacity = 1; clearTimeout(ftt); ftt = setTimeout(()=>{ ftoast.style.opacity = 0; }, 1700); }
@@ -2902,20 +2913,20 @@ const BUILTIN = [];
   function spend(c){ if(F.coins<c){ ft('Puan yetmiyor'); return false; } F.coins -= c; return true; }
   function cell(o, d, need, wi, k, i, now, isA){
     const r = Math.min(1, o.g/need), wet = Math.max(0, (o.w||0)+wi-now)/wi, rdy = r>=1, st = r<.25?0:r<.6?1:r<1?2:3;
-    return '<div class="fc'+(rdy?' rdy':wet<=0?' dry':'')+'" data-k="'+k+i+'">'+(isA?animSvg(o.t):cropSvg(o.c,st))+
-      '<i class="fb"><b style="width:'+(r*100).toFixed(0)+'%"></b></i><i class="fw"><b style="width:'+(wet*100).toFixed(0)+'%"></b></i><span>'+(rdy?'Hazır!':d.n+' %'+Math.floor(r*100))+'</span></div>';
+    return '<div class="fc'+(rdy?' rdy':'')+'" data-k="'+k+i+'">'+(isA?animSvg(o.t):cropSvg(o.c,st))+(wet<=0&&!rdy?'<i class="dr">'+DROP+'</i>':'')+
+      '<i class="fb"><b style="width:'+(r*100).toFixed(0)+'%"></b></i><i class="fw"><b style="width:'+(wet*100).toFixed(0)+'%"></b></i>'+(rdy?'<span>Hazır!</span>':'')+'</div>';
   }
   function frender(){
     if(!fm.classList.contains('open') || !F || Date.now()-fpress<700) return;
-    const now = Date.now(), me = who(), o = otherOf(me), s = fview=='me' ? F : P;
-    let h = '<div class="fh"><div class="fp"><b>'+(s?s.coins:0)+'</b> puan · Seviye '+(s?LV(s):1)+'<div class="fx"><b style="width:'+(s?(100*(s.xp-12*Math.pow(LV(s)-1,2))/(12*(2*LV(s)-1))).toFixed(0):0)+'%"></b></div></div><button class="fbn" data-k="x">✕</button></div>';
-    h += '<div class="ft"><button data-k="tm" class="'+(fview=='me'?'on':'')+'">Çiftliğim</button><button data-k="to" class="'+(fview=='ot'?'on':'')+'">'+NAMES[o]+'</button></div>';
+    const now = Date.now(), me = who(), o = otherOf(me), s = fview=='me' ? F : P, L = s ? LV(s) : 1;
+    let h = '<div class="fh"><div class="pn fp">'+COIN+'<span>'+(s?s.coins:0)+' puan</span><em>Sv '+L+'</em><div class="fx"><b style="width:'+(s?(100*(s.xp-12*Math.pow(L-1,2))/(12*(2*L-1))).toFixed(0):0)+'%"></b></div></div><button class="pb fbn" data-k="x">✕</button></div>';
+    h += '<div class="ft"><button class="pb'+(fview=='me'?' on':'')+'" data-k="tm">Çiftliğim</button><button class="pb'+(fview=='ot'?' on':'')+'" data-k="to">'+NAMES[o]+'</button></div>';
     if(!s){ fmc.innerHTML = h+'<p class="hint">'+NAMES[o]+' henüz çiftliğini açmamış.</p>'; return; }
     advAll(s, now);
-    h += '<div class="fl">Tarlalar</div><div class="fg">'+s.plots.map((p,i)=>p.c ? cell(p,CROPS[p.c],CROPS[p.c].g*H,WI,'p',i,now,false) : '<div class="fc e" data-k="p'+i+'"><span>'+(fview=='me'?'+ Ek':'boş')+'</span></div>').join('')+'</div>';
-    h += '<div class="fl">Hayvanlar</div><div class="fg">'+(s.an.length ? s.an.map((p,i)=>cell(p,ANIM[p.t],ANIM[p.t].g*H,ANIM[p.t].fd*H,'a',i,now,true)).join('') : '<p class="hint" style="grid-column:1/-1">Henüz hayvan yok'+(fview=='me'?' · Dükkan’dan alabilirsin (Seviye 2).':'.')+'</p>')+'</div>';
-    h += fview=='me' ? '<div class="fa"><button data-k="wa">Hepsini sula</button><button data-k="ha">Hepsini topla</button><button data-k="sh">Dükkan</button></div><p class="hint">Sulama 6 saat yeter (hayvan yemi 8-12 saat). Kuruyunca büyüme yavaşlar ama bitki ölmez.</p>'
-      : '<p class="hint">Dokun: sula / yemle 💧 (yardım başına +3 puan). '+NAMES[o]+' açınca görür.</p>';
+    h += '<div class="fl">Tarlalar</div><div class="fg">'+s.plots.map((p,i)=>p.c ? cell(p,CROPS[p.c],CROPS[p.c].g*H,WI,'p',i,now,false) : '<div class="fc e" data-k="p'+i+'">'+cropSvg(null,0)+(fview=='me'?'<span>+</span>':'')+'</div>').join('')+'</div>';
+    h += '<div class="fl">Hayvanlar</div>'+(s.an.length ? '<div class="fg">'+s.an.map((p,i)=>cell(p,ANIM[p.t],ANIM[p.t].g*H,ANIM[p.t].fd*H,'a',i,now,true)).join('')+'</div>' : '<p class="hint" style="margin-top:0">Henüz hayvan yok'+(fview=='me'?' · Dükkan’dan alabilirsin (Seviye 2).':'.')+'</p>');
+    h += fview=='me' ? '<div class="fa"><button class="pb" data-k="wa">Hepsini sula</button><button class="pb" data-k="ha">Hepsini topla</button><button class="pb" data-k="sh">Dükkan</button></div><p class="hint">Sulama 6 saat yeter (hayvan yemi 8-12 saat). Kuruyunca büyüme yavaşlar ama bitki ölmez.</p>'
+      : '<p class="hint">Dokun: sula / yemle (yardım başına +3 puan). '+NAMES[o]+' açınca görür.</p>';
     fmc.innerHTML = h;
   }
   function fSheet(title, items){
@@ -2994,7 +3005,7 @@ const BUILTIN = [];
       if(s){ advAll(s, n);
         d = s.plots.some(o=>o.c && (o.g>=CROPS[o.c].g*H || (o.w||0)+WI<n)) || s.an.some(o=>o.g>=ANIM[o.t].g*H || (o.w||0)+ANIM[o.t].fd*H<n); }
     }catch(e){}
-    fbtn.classList.toggle('fd', d);
+    mw.classList.toggle('fd', d); fbtn.classList.toggle('fd', d);
   }
   document.addEventListener('visibilitychange', ()=>{ if(document.visibilityState=='hidden') fsave(true); });
   window.addEventListener('pagehide', ()=>fsave(true));
